@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderModule } from './header/header.module';
 
 @Component({
-  selector: 'app-root',
+  selector: 'evl-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
