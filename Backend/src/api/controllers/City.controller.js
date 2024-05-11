@@ -1,3 +1,4 @@
+// Importación de funciones y modelos necesarios
 const { deleteImgCloudinary } = require("../../middleware/files.middleware");
 const City = require("../models/City.model");
 const Comment = require("../models/Comment.model");
@@ -6,65 +7,88 @@ const Event = require("../models/Event.model");
 const Organization = require("../models/Organization.model");
 const User = require("../models/User.model");
 
+// Controlador para crear una nueva ciudad
 const postCity = async (req, res, next) => {
-  let catchCity = req.file?.path;
+  let catchCity = req.file?.path; // Captura la ruta de la imagen, si existe
   try {
-    await City.syncIndexes();
+    await City.syncIndexes(); // Sincroniza los índices de la colección City en la base de datos
 
+    // Crear una nueva instancia de City con los datos recibidos
     const newCity = new City(req.body);
-    //ponemos imagen por defecto si no hay ninguna
+
+    // Establecer una imagen por defecto si no se proporciona ninguna
     if (req.file) {
       newCity.image = catchCity;
     } else {
       newCity.image =
         "https://res.cloudinary.com/dhr13yihn/image/upload/v1694193903/proyectoEventland/cityAssets/village_lfiuho.png";
     }
-    //guardamos el City en la bbdd
+
+    // Guardar la instancia de City en la base de datos
     const savedCity = await newCity.save();
+
+    // Manejo de la respuesta
     if (savedCity) {
       return res.status(200).json(savedCity);
     } else {
       return res.status(404).json("Couldn't save the city in the DB");
     }
   } catch (error) {
+    // En caso de error, eliminar la imagen de Cloudinary (si existe) y pasar al siguiente middleware de manejo de errores
     req.file?.path && deleteImgCloudinary(catchCity);
     return next(error);
   }
 };
 
+// Controlador para obtener una ciudad por nombre
 const getByNameCity = async (req, res, next) => {
   try {
     const { name = "" } = req.params;
+
+    // Buscar todas las ciudades en la base de datos
     const cityByName = await City.find();
+
+    // Filtrar las ciudades cuyos nombres incluyan el nombre proporcionado (insensible a mayúsculas/minúsculas)
     const filterCity = cityByName.filter((element) =>
       element.name.toLowerCase().includes(name.toLowerCase()),
     );
+
+    // Manejo de la respuesta
     if (filterCity.length > 0) {
       return res.status(200).json({ data: cityByName });
     } else {
       return res.status(404).json("Couldn't find the city");
     }
   } catch (error) {
+    // En caso de error, pasar al siguiente middleware de manejo de errores
     return next(error);
   }
 };
 
+// Controlador para obtener todas las ciudades
 const getAllCities = async (req, res, next) => {
   try {
+    // Obtener todas las ciudades de la base de datos
     const allCities = await City.find();
+
+    // Manejo de la respuesta
     if (allCities.length > 0) {
       return res.status(200).json({ data: allCities });
     } else {
       return res.status(404).json("cities not found");
     }
   } catch (error) {
+    // En caso de error, pasar al siguiente middleware de manejo de errores
     return next(error);
   }
 };
 
+// Controlador para obtener una ciudad por ID
 const getCityById = async (req, res, next) => {
   try {
     const { id } = req.params;
+
+    // Obtener la ciudad por ID y popular los eventos, organizaciones y establecimientos asociados
     const cityById = await City.findById(id);
     if (cityById) {
       return res.status(200).json({
@@ -76,6 +100,7 @@ const getCityById = async (req, res, next) => {
       res.status(404).json("city not found");
     }
   } catch (error) {
+    // En caso de error, pasar al siguiente middleware de manejo de errores
     return next(error);
   }
 };

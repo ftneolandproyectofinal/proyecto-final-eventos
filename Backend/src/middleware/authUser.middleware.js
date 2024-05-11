@@ -68,7 +68,7 @@ const isAuthUserOrAdmin = async (req, res, next) => {
 // const isAuthUserOwnerDelete = async (req, res, next) => {
 //   const token = req.headers.authorization?.replace("Bearer ", "");
 //   if (!token) {
-//     return next(new Error("You're not authenticated ❌"));
+//     return next(new Error("You're not auticated ❌"));
 //   }
 
 //   try {
