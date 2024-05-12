@@ -1,0 +1,16 @@
+mat-toolbar {
+  background-color: #173f4b;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Asegúrate de que el z-index sea mayor que cualquier otro elemento en la página */
+  width: 100vw;
+  height: 10vh;
+  border-bottom: 1.5px solid;
+}
+.logo {
+  width: 60px;
+  height: 100%;
+  border-radius: 10px;
+}
