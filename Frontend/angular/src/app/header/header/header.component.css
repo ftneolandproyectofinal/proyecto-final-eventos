@@ -1,13 +1,25 @@
 mat-toolbar {
-  background-color: #173f4b;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  background-color: #0f1521;
   z-index: 1000; /* Asegúrate de que el z-index sea mayor que cualquier otro elemento en la página */
   width: 100vw;
   height: 10vh;
-  border-bottom: 1.5px solid;
+  border-bottom: 1.5px solid #ebecee;
+  gap: 2em;
+  display: flex;
+  justify-content: space-between;
+}
+mat-form-field {
+  margin-top: 1em;
+  background-color: #0f1521;
+}
+
+button {
+  background-color: #0f1521;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+  font-size: large;
+  color: #ebecee;
 }
 .logo {
   width: 60px;

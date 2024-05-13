@@ -6,26 +6,29 @@
       src="https://res.cloudinary.com/dhr13yihn/image/upload/v1694439036/proyectoEventland/assets/OIG_gsdzjv.jpg"
     />
   </button>
-  <span class="example-spacer"></span>
-  <button
-    mat-icon-button
-    class="example-icon favorite-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with share icon"
-  >
+
+  <mat-form-field>
+    <mat-label>Search for events!</mat-label>
+    <input matInput type="text" [(ngModel)]="value" />
+    @if (value) {
+    <button matSuffix mat-icon-button aria-label="Clear" (click)="value = ''">
+      <mat-icon>close</mat-icon>
+    </button>
+    }
+  </mat-form-field>
+  <span></span>
+  <span></span>
+  <span></span>
+
+  <button routerLink="/log-in"><mat-icon>home</mat-icon></button>
+  <button mat-icon-button aria-label="share icon">
     <mat-icon>share</mat-icon>
   </button>
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with menu icon"
-  >
+  <button mat-button [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item><mat-icon>light</mat-icon></button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
 </mat-toolbar>

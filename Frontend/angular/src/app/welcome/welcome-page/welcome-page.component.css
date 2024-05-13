@@ -1,0 +1,13 @@
+* {
+  height: 90vh;
+  background-image: url("./assets/Captura\ de\ pantalla\ 2024-02-07\ 124327.png");
+  background-size: cover;
+
+  background-position: center;
+  font-size: xx-large;
+  background-color: #173f4b;
+}
+p {
+  color: #ebecee;
+  padding: 2em;
+}
