@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -20,6 +21,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     FormsModule,
     MatMenuModule,
+    RouterModule,
   ],
   exports: [HeaderComponent],
 })
